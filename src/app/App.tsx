@@ -24,23 +24,26 @@ const products = [
   {
     id: 1,
     name: "Blooming Banquet",
-    image: "image: imgBlooming",
+    image: imgBlooming,
+    price: "Rp 25.000",
     description:
-      "Bernuansa Floral dan elegant.",
+      "Perpaduan aroma floral mewah dan elegan. Diracik murni tanpa alkohol tambahan, sangat cocok untuk menghadiri acara formal atau pemaikaian harian.",
   },
   {
     id: 2,
     name: "Romantic Wish",
-    image: "image: imgRomantic",
+    image: imgRomantic,
+    price: "Rp 25.000",
     description:
-      "Aroma segar dan ceria",
+      "Kombinasi aroma buah manis yang segar dan ceria. Memberikan kesan romantis yang memikat dan membangkitkan rasa percaya diri sepanjang hari.",
   },
   {
     id: 3,
     name: "Ferry Light Ice",
-    image: "image: imgFerry",
+    image: imgFerry,
+    price: "Rp 25.000",
     description:
-      "Sensasi cool dan unisex.",
+      "Sensasi aroma cool, fresh, dan aquatic yang maskulin sekaligus unisex. Memberikan kesegaran maksimal untuk aktivitas luar ruangan.",
   },
 ];
 
@@ -49,7 +52,7 @@ const testimonials = [
     id: 1,
     name: "Go Youn Jung",
     role: "Perfume Enthusiast",
-    text: "Adminnya ramah pas konsultasi, direkomendasiin Blooming Banquet dan beneran cocok banget sama selera aku.",
+    text: "Adminnya ramah pas konsultasi, direkomendasiin Romantic Wish dan beneran cocok banget sama selera aku.",
     avatar:
       "https://asset.tabloidbintang.com/img/1747632657_602bc21057868d86e38b.jpeg",
   },
@@ -104,9 +107,15 @@ export default function App() {
 
   return (
     <div className="min-h-screen relative bg-background text-foreground overflow-x-hidden selection:bg-primary/20">
-      {/* Sticky Navigation */}
+      {/* BANNER PROMO GRATIS ONGKIR MENGAMBANG DI ATAS */}
+      <div className="fixed top-0 left-0 right-0 z-[60] bg-[#8B1E2F] text-white text-xs sm:text-sm font-semibold py-2 text-center tracking-wide shadow-md">
+        ✨ PROMO SPESIAL: Gratis Ongkir Seluruh Indonesia Khusus
+        Transaksi Hari Ini! ✨
+      </div>
+
+      {/* Sticky Navigation (Diturunin dikit biar gak ketimpa banner) */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-[36px] left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-background/80 backdrop-blur-md border-b border-border py-3 shadow-sm"
             : "bg-transparent py-5"
@@ -144,17 +153,23 @@ export default function App() {
             >
               Testimoni
             </button>
+            <button
+              onClick={() => scrollTo("faq")}
+              className="text-sm font-medium hover:text-primary transition-colors"
+            >
+              FAQ
+            </button>
           </nav>
 
           <div className="hidden md:block">
-            <a 
-            href="https://ig.me/m/decant.ajah" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="px-6 py-2.5 bg-primary text-primary-foreground text-sm rounded-full block text-center"
-          >
-            Contact
-          </a>
+            <a
+              href="https://ig.me/m/decant.ajah"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2.5 bg-primary text-primary-foreground text-sm rounded-full block text-center"
+            >
+              Contact
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -197,10 +212,16 @@ export default function App() {
               >
                 Testimoni
               </button>
-              <a 
-                href="https://ig.me/m/decant.ajah" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <button
+                onClick={() => scrollTo("faq")}
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                FAQ
+              </button>
+              <a
+                href="https://ig.me/m/decant.ajah"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full mt-2 py-3 bg-primary text-primary-foreground text-sm rounded-md block text-center"
               >
                 Contact
@@ -240,10 +261,19 @@ export default function App() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-3xl backdrop-blur-[2px] bg-background/40 p-8 md:p-12 rounded-3xl border border-white/20 shadow-2xl"
           >
+            {/* Subtle shiny overlay on the card */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
+
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground mb-6 leading-tight drop-shadow-sm">
               Only Serve{" "}
-              <span className="text-primary italic">
+              <span className="text-primary italic relative inline-block">
                 Our Best
+                <motion.span
+                  className="absolute -bottom-2 left-0 right-0 h-1 bg-secondary rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 1, duration: 0.8 }}
+                ></motion.span>
               </span>{" "}
               For You
             </h1>
@@ -254,12 +284,134 @@ export default function App() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => scrollTo("gallery")}
-                className="w-full sm:w-auto px-8 py-3.5 bg-primary text-primary-foreground rounded-full font-semibold shadow-[0_4px_20px_rgba(140,33,49,0.3)] hover:bg-primary/90 hover:shadow-[0_6px_25px_rgba(140,33,49,0.4)] transition-all hover:-translate-y-0.5"
+                className="w-full sm:w-auto px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold shadow-[0_4px_20px_rgba(140,33,49,0.3)] hover:bg-[#7a1c2a] hover:shadow-[0_8px_30px_rgba(140,33,49,0.5)] transition-all hover:-translate-y-1 flex items-center justify-center gap-2 group/btn"
               >
                 Daftar Menu (Katalog)
+                <ArrowRight
+                  size={18}
+                  className="group-hover/btn:translate-x-1 transition-transform"
+                />
               </button>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Unique Selling Proposition (USP) Section */}
+      <section
+        id="keunggulan"
+        className="py-24 bg-accent/30 border-b border-border/50"
+      >
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <span className="text-secondary font-semibold tracking-wider uppercase text-sm mb-2 block">
+              Mengapa Memilih Kami?
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-foreground">
+              Keunggulan Decant Ajah
+            </h2>
+            <div className="w-24 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 font-sans">
+            <motion.div
+              whileHover={{ y: -5 }}
+              className="bg-card p-8 rounded-2xl border border-secondary/20 shadow-sm text-center hover:shadow-[0_10px_40px_rgba(212,175,55,0.1)] transition-all"
+            >
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                <Star size={24} fill="currentColor" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                100% Original
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Jaminan kualitas cairan murni diekstrak langsung
+                dari botol resmi tanpa oplosan.
+              </p>
+            </motion.div>
+            <motion.div
+              whileHover={{ y: -5 }}
+              className="bg-card p-8 rounded-2xl border border-secondary/20 shadow-sm text-center hover:shadow-[0_10px_40px_rgba(212,175,55,0.1)] transition-all"
+            >
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                Higienis & Steril
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Proses pemindahan menggunakan syringe steril
+                khusus demi menjaga keutuhan aroma parfum.
+              </p>
+            </motion.div>
+            <motion.div
+              whileHover={{ y: -5 }}
+              className="bg-card p-8 rounded-2xl border border-secondary/20 shadow-sm text-center hover:shadow-[0_10px_40px_rgba(212,175,55,0.1)] transition-all"
+            >
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path>
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                Botol Kaca Premium
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Menggunakan botol spray kaca tebal yang aman,
+                elegan, serta sangat travel-friendly.
+              </p>
+            </motion.div>
+            <motion.div
+              whileHover={{ y: -5 }}
+              className="bg-card p-8 rounded-2xl border border-secondary/20 shadow-sm text-center hover:shadow-[0_10px_40px_rgba(212,175,55,0.1)] transition-all"
+            >
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 2v20"></path>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                Harga Bersahabat
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Nikmati kemewahan aroma brand dunia dengan
+                penyesuaian budget kantong mahasiswa.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -292,24 +444,47 @@ export default function App() {
                 <div className="relative aspect-[4/5] overflow-hidden bg-muted/30 p-6 flex items-center justify-center">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                   <img
-                    src={product.id === 1 ? imgBlooming : product.id === 2 ? imgRomantic : imgFerry}
+                    src={
+                      product.id === 1
+                        ? imgBlooming
+                        : product.id === 2
+                          ? imgRomantic
+                          : imgFerry
+                    }
                     alt={product.name}
                     className="w-full h-full object-contain filter drop-shadow-lg group-hover:scale-110 transition-transform duration-700 ease-out"
                   />
                 </div>
-                <div className="p-8 flex flex-col flex-grow">
-                  <h3 className="font-serif text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">
+                <div className="p-8 flex flex-col flex-grow relative">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-secondary rounded-b-full opacity-50 group-hover:w-24 group-hover:opacity-100 transition-all duration-500"></div>
+                  <h3 className="font-serif text-2xl font-semibold mb-1 group-hover:text-primary transition-colors text-center mt-2">
                     {product.name}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow">
+
+                  {/* HARGA CORET & HARGA DISKON */}
+                  <div className="flex flex-col items-center justify-center mb-4">
+                    <span className="text-xs text-muted-foreground line-through decoration-[#8B1E2F]/60 decoration-2 font-medium mb-0.5">
+                      Rp 75.000
+                    </span>
+                    <p className="text-[#8B1E2F] font-bold text-xl">
+                      {product.price}{" "}
+                      <span className="text-xs text-muted-foreground font-normal">
+                        / 5ml
+                      </span>
+                    </p>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-grow text-center">
                     {product.description}
                   </p>
-                  <button className="w-full py-3.5 px-6 rounded-xl bg-accent text-foreground font-semibold border border-transparent group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_20px_rgba(140,33,49,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
-                    Beli Sekarang{" "}
-                    <ArrowRight
-                      size={18}
-                      className="group-hover:translate-x-1 transition-transform"
-                    />
+                  <button className="w-full py-3.5 px-6 rounded-xl bg-accent text-foreground font-semibold border border-transparent group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_20px_rgba(140,33,49,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 relative overflow-hidden">
+                    <span className="relative z-10 flex items-center gap-2">
+                      Beli Sekarang{" "}
+                      <ArrowRight
+                        size={18}
+                        className="group-hover:translate-x-1 transition-transform"
+                      />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out"></div>
                   </button>
                 </div>
               </motion.div>
@@ -378,6 +553,79 @@ export default function App() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section
+        id="faq"
+        className="py-24 bg-background border-t border-border/50"
+      >
+        <div className="container mx-auto px-6 md:px-12 max-w-4xl">
+          <div className="text-center mb-16">
+            <span className="text-secondary font-semibold tracking-wider uppercase text-sm mb-2 block">
+              Pertanyaan Umum
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-foreground">
+              Frequently Asked Questions (FAQ)
+            </h2>
+            <div className="w-24 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+          </div>
+          <div className="space-y-6 font-sans">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-card p-6 rounded-2xl border border-border shadow-sm hover:border-primary/30 transition-colors"
+            >
+              <h4 className="font-semibold text-foreground mb-2">
+                Apakah kualitas aromanya berubah karena
+                dipindahkan?
+              </h4>
+              <p className="text-muted-foreground text-sm">
+                Tidak sama sekali. Kami menjaga kemurnian cairan
+                dengan teknik pemindahan steril langsung dari
+                botol utama tanpa campuran air maupun alkohol
+                pelarut.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-card p-6 rounded-2xl border border-border shadow-sm hover:border-primary/30 transition-colors"
+            >
+              <h4 className="font-semibold text-foreground mb-2">
+                Bagaimana dengan ketahanan daya sebar parfum?
+              </h4>
+              <p className="text-muted-foreground text-sm">
+                Daya tahan dan proyeksi aroma 100% identik
+                dengan botol bawaan aslinya, umumnya mampu
+                bertahan antara 6 hingga 9 jam tergantung jenis
+                varian.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-card p-6 rounded-2xl border border-border shadow-sm border-l-4 border-l-primary hover:border-primary/30 transition-colors"
+            >
+              <h4 className="font-semibold text-foreground mb-2">
+                ⚠️ Jaminan Pengiriman & Garansi Ganti Baru
+              </h4>
+              <p className="text-muted-foreground text-sm">
+                Kami berkomitmen memberikan keamanan penuh.
+                Apabila produk botol kaca pecah atau bocor
+                selama proses pengiriman kurir, kami berikan
+                garansi ganti baru gratis. Syaratnya cukup
+                lampirkan video unboxing paket tanpa jeda.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Social Connections */}
       <section className="py-24 bg-background border-t border-border">
         <div className="container mx-auto px-6 md:px-12 text-center">
@@ -441,7 +689,20 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-background border-t border-border/50 text-center">
+      <footer className="py-12 bg-background border-t border-border/50 text-center">
+        <div className="container mx-auto px-6 max-w-md mb-8 text-sm text-muted-foreground">
+          <p className="font-semibold mb-3 uppercase tracking-wider text-xs text-foreground/70">
+            Pengembang Decant Ajah
+          </p>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-left border border-border rounded-2xl p-4 bg-card/50 shadow-sm font-sans text-xs md:text-sm">
+            <span className="font-medium">
+              Muhammad Evan Alviansyah
+            </span>
+            <span className="font-mono text-right">
+              23.11.5844
+            </span>
+          </div>
+        </div>
         <p className="text-muted-foreground text-sm font-medium">
           Decant Ajah © 2026
         </p>
